@@ -5,6 +5,7 @@ import android.accessibilityservice.AccessibilityServiceInfo;
 import android.app.Notification;
 import android.content.Intent;
 import android.os.Parcelable;
+import android.util.Log;
 import android.view.accessibility.AccessibilityEvent;
 
 /**
@@ -16,7 +17,7 @@ public class NeNotificationService extends AccessibilityService {
 
     @Override
     public void onAccessibilityEvent(AccessibilityEvent event) {
-
+        Log.i("zzz","event="+event.getEventType());
         //判断辅助服务触发的事件是否是通知栏改变事件
         if (event.getEventType() == AccessibilityEvent.TYPE_NOTIFICATION_STATE_CHANGED) {
 
@@ -36,8 +37,6 @@ public class NeNotificationService extends AccessibilityService {
 
                 //进行处理解析通知栏内容的函数
                 MainActivity.notifyReceive((String) event.getPackageName(), notification);
-
-            } else {
 
             }
 

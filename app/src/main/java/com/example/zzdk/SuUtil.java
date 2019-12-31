@@ -12,9 +12,14 @@ public class SuUtil {
      * 结束进程,执行操作调用即可
      */
     public static void kill(String packageName) {
-        initProcess();
-        killProcess(packageName);
-        close();
+        try{
+            initProcess();
+            killProcess(packageName);
+            close();
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
     }
 
     /**
@@ -33,6 +38,9 @@ public class SuUtil {
      * 结束进程
      */
     private static void killProcess(String packageName) {
+        if(process==null){
+            return;
+        }
         OutputStream out = process.getOutputStream();
         String cmd = "am force-stop " + packageName + " \n";
         try {

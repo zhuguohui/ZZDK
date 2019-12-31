@@ -2,6 +2,8 @@ package com.example.zzdk;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
+import android.app.KeyguardManager;
 import android.app.Notification;
 import android.content.Context;
 import android.content.Intent;
@@ -10,6 +12,8 @@ import android.graphics.PixelFormat;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.PowerManager;
 import android.provider.Settings;
 import android.text.TextUtils;
 import android.util.Log;
@@ -38,21 +42,17 @@ public class MainActivity extends AppCompatActivity {
     private int y;
     private WindowManager windowManager;
     private VoiceLinerLayout playView;
+    Handler handler=new Handler();
 
     public static void notifyReceive(String packageName, Notification notification) {
         Log.i("zzz", "notifyReceive packageName=" + packageName + "notification:" + notification);
         if ("com.android.mms".equals(packageName)) {
-         /*   PackageManager packageManager = MyApp.app.getPackageManager();
-            Intent intent = null;
-            intent = packageManager.getLaunchIntentForPackage("com.sand.airdroid");
-            if (intent != null) {
-              //  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                MyApp.app.startActivity(intent);
-            }*/
+
             if (btnStarApp != null) {
                 btnStarApp.performClick();
             }
         }
+
     }
 
     @Override
@@ -74,15 +74,19 @@ public class MainActivity extends AppCompatActivity {
         findViewById(R.id.tv_star_app).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                wakeUpAndUnlock();
                 //先关闭应用，再重启。防止airDroid进程被休眠
                 SuUtil.kill("com.sand.airdroid");
-                PackageManager packageManager = MyApp.app.getPackageManager();
-                Intent intent = null;
-                intent = packageManager.getLaunchIntentForPackage("com.sand.airdroid");
-                if (intent != null) {
-                    //  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    MyApp.app.startActivity(intent);
-                }
+                handler.postDelayed(()->{
+                    PackageManager packageManager = MyApp.app.getPackageManager();
+                    Intent intent = null;
+                    intent = packageManager.getLaunchIntentForPackage("com.sand.airdroid");
+                    if (intent != null) {
+                        //  intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                        MyApp.app.startActivity(intent);
+                    }
+                },3000);
+
             }
         });
         btnStarApp = findViewById(R.id.tv_star_app);
@@ -99,21 +103,38 @@ public class MainActivity extends AppCompatActivity {
                  //   doExec("am force-stop com.sand.airdroid");
                     SuUtil.kill("com.sand.airdroid");
                 });
+
+        findViewById(R.id.btn_test).setOnClickListener(v->{
+            handler.postDelayed(()->{
+                btnStarApp.performClick();
+            },5000);
+        });
     }
 
-    private void doExec(String cmd) {
-        List<String> cmds = new ArrayList<String>();
-        cmds.add( "sh");
-        cmds.add( "-c");
-        cmds.add(cmd);
-        ProcessBuilder pb = new ProcessBuilder(cmds);
-        try {
-            Process p = pb.start();
-        } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+    /**
+     * 唤醒手机屏幕并解锁
+     */
+    public void wakeUpAndUnlock() {
+        // 获取电源管理器对象
+        PowerManager pm = (PowerManager)
+                getSystemService(Context.POWER_SERVICE);
+        boolean screenOn = pm.isScreenOn();
+        if (!screenOn) {
+            // 获取PowerManager.WakeLock对象,后面的参数|表示同时传入两个值,最后的是LogCat里用的Tag
+            @SuppressLint("InvalidWakeLockTag") PowerManager.WakeLock wl = pm.newWakeLock(
+                    PowerManager.ACQUIRE_CAUSES_WAKEUP |
+                            PowerManager.SCREEN_BRIGHT_WAKE_LOCK, "bright");
+            wl.acquire(10000); // 点亮屏幕
+            wl.release(); // 释放
         }
+        // 屏幕解锁
+        KeyguardManager keyguardManager = (KeyguardManager)this.getSystemService(KEYGUARD_SERVICE);
+        KeyguardManager.KeyguardLock keyguardLock = keyguardManager.newKeyguardLock("unLock");
+        // 屏幕锁定
+        keyguardLock.reenableKeyguard();
+        keyguardLock.disableKeyguard(); // 解锁
     }
+
 
 
      View.OnTouchListener onTouchListener = new View.OnTouchListener() {
