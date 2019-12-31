@@ -1,0 +1,42 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="cn.pedant.SweetAlert.test" >
+4
+5    <uses-sdk
+5-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:5:5-74
+6        android:minSdkVersion="16"
+6-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:5:15-41
+7        android:targetSdkVersion="29" />
+7-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:5:42-71
+8
+9    <instrumentation
+9-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:11:5-15:75
+10        android:name="android.test.InstrumentationTestRunner"
+10-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:11:22-75
+11        android:functionalTest="false"
+11-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:14:22-52
+12        android:handleProfiling="false"
+12-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:13:22-53
+13        android:label="Tests for cn.pedant.SweetAlert.test"
+13-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:15:22-73
+14        android:targetPackage="cn.pedant.SweetAlert.test" />
+14-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:12:22-71
+15
+16    <application
+16-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:7:5-9:19
+17        android:allowBackup="true"
+17-->[com.pnikosis:materialish-progress:1.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\7f64f6919b001983ceba45733b155fa7\materialish-progress-1.0\AndroidManifest.xml:12:9-35
+18        android:appComponentFactory="androidx.core.app.CoreComponentFactory"
+18-->[androidx.core:core:1.0.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\ec609e8cee787e2dff3592c66b08a66a\core-1.0.0\AndroidManifest.xml:22:18-86
+19        android:debuggable="true"
+19-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:7:18-43
+20        android:icon="@drawable/ic_launcher"
+20-->[com.pnikosis:materialish-progress:1.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\7f64f6919b001983ceba45733b155fa7\materialish-progress-1.0\AndroidManifest.xml:13:9-45
+21        android:label="@string/app_name" >
+21-->[com.pnikosis:materialish-progress:1.0] C:\Users\Administrator\.gradle\caches\transforms-2\files-2.1\7f64f6919b001983ceba45733b155fa7\materialish-progress-1.0\AndroidManifest.xml:14:9-41
+22        <uses-library android:name="android.test.runner" />
+22-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:8:9-60
+22-->D:\LearnAndroid\ZZDK\sweetDialog\build\intermediates\tmp\manifest\androidTest\debug\manifestMerger4207894119608205568.xml:8:23-57
+23    </application>
+24
+25</manifest>
